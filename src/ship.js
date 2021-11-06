@@ -1,12 +1,18 @@
 class Ship {
-  constructor(currentPort) {
-    this.currentPort = currentPort;
+  constructor(itinerary) {
+    this.itinerary = itinerary;
+    this.previousPort = null;
+    this.currentPort = itinerary.ports[0];
   }
   setSail() {
+    this.previousPort = this.currentPort;
     this.currentPort = null;
   }
-  dock(port) {
-    this.currentPort = port;
+  dock() {
+    const itinerary = this.itinerary;
+    const previousPortIndex = itinerary.ports.indexOf(this.previousPort);
+    const nextPortIndex = previousPortIndex + 1;
+    this.currentPort = itinerary.ports[nextPortIndex];
   }
 }
 

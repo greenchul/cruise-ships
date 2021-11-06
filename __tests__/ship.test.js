@@ -1,30 +1,36 @@
+const Itinerary = require("../src/itinerary.js");
 const Port = require("../src/port.js");
 const Ship = require("../src/Ship.js");
 
 describe("cruise ship constructor", () => {
   it("Should create an instance of an object", () => {
-    const ship = new Ship();
+    const itinerary = new Itinerary([jest.fn(), jest.fn()]);
+    const ship = new Ship(itinerary);
     expect(ship).toBeInstanceOf(Object);
   });
   it("Should have a starting port", () => {
-    const port = new Port("Blackpool");
-    const ship = new Ship(port);
+    const port = jest.fn();
+    const port2 = jest.fn();
+    const itinerary = new Itinerary([port, port2]);
+    const ship = new Ship(itinerary);
     expect(ship.currentPort).toBe(port);
   });
 });
 
 describe("Cruise ship methods", () => {
   it("Should be able to set sail when setSail method called", () => {
-    const port = new Port("Dover");
-    const ship = new Ship(port);
+    const itinerary = new Itinerary([jest.fn(), jest.fn()]);
+    const ship = new Ship(itinerary);
     ship.setSail();
     expect(ship.currentPort).toBeFalsy();
   });
   it("Should be able to dock at a different port", () => {
-    const dover = new Port("Dover");
-    const ship = new Ship(dover);
-    const portsmouth = new Port("Portsmouth");
-    ship.dock(portsmouth);
-    expect(ship.currentPort).toBe(portsmouth);
+    const port = jest.fn();
+    const port2 = jest.fn();
+    const itinerary = new Itinerary([port, port2]);
+    const ship = new Ship(itinerary);
+    ship.setSail();
+    ship.dock();
+    expect(ship.currentPort).toBe(port2);
   });
 });
