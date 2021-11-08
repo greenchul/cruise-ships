@@ -6,7 +6,7 @@ describe("Ports", () => {
     let ship;
     beforeEach(() => {
       port = new Port("Blackpool");
-      ship = {};
+      ship = jest.fn();
     });
     it("Should create an instance of an object", () => {
       expect(port).toBeInstanceOf(Object);
@@ -21,7 +21,7 @@ describe("Ports", () => {
       expect(port.ships).toContain(ship);
     });
     it("Should remove a ship from ships property when removeShip is called", () => {
-      const anotherShip = {};
+      const anotherShip = jest.fn();
       port.addShip(ship);
       port.addShip(anotherShip);
       port.removeShip(ship);

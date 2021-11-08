@@ -9,9 +9,21 @@ describe("cruise ship", () => {
     let itinerary;
     let ship;
     beforeEach(() => {
-      port = new Port("Blackpool");
-      port2 = new Port("Dover");
-      itinerary = new Itinerary([port, port2]);
+      port = {
+        addShip: jest.fn(),
+        removeShip: jest.fn(),
+        name: "Blackpool",
+        ships: [],
+      };
+      port2 = {
+        addShip: jest.fn(),
+        removeShip: jest.fn(),
+        name: "Dover",
+        ships: [],
+      };
+      itinerary = {
+        ports: [port, port2],
+      };
       ship = new Ship(itinerary);
     });
     it("Should create an instance of an object", () => {
@@ -21,27 +33,35 @@ describe("cruise ship", () => {
       expect(ship.currentPort).toBe(port);
     });
     it("Should get added to port on instantiation", () => {
-      expect(port.ships).toContain(ship);
+      // expect(port.ships).toContain(ship);
+      expect(port.addShip).toHaveBeenCalledWith(ship);
     });
     it("Should be able to set sail when setSail method called", () => {
       ship.setSail();
       expect(ship.currentPort).toBeFalsy();
       expect(ship.previousPort).toBe(port);
-      expect(ship.previousPort.ships).not.toContain(ship);
+      expect(port.removeShip).toHaveBeenCalledWith(ship);
     });
     it("Should be able to dock at a different port", () => {
       ship.setSail();
       ship.dock();
       expect(ship.currentPort).toBe(port2);
-      expect(port2.ships).toContain(ship);
+      expect(port2.addShip).toHaveBeenCalledWith(ship);
     });
   });
 });
 
 describe("Cruise ship methods", () => {
   it("Should not be able to sail further than its itinerary", () => {
-    const port = new Port("Blackpool");
-    const itinerary = new Itinerary([port]);
+    const port = {
+      addShip: jest.fn(),
+      removeShip: jest.fn(),
+      name: "Blackpool",
+      ships: [],
+    };
+    const itinerary = {
+      ports: [port],
+    };
     const ship = new Ship(itinerary);
     expect(() => {
       return ship.setSail();
