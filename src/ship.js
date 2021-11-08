@@ -15,12 +15,14 @@ class Ship {
 
     this.previousPort = this.currentPort;
     this.currentPort = null;
+    this.previousPort.removeShip(this);
   }
   dock() {
     const itinerary = this.itinerary;
     const previousPortIndex = itinerary.ports.indexOf(this.previousPort);
     const nextPortIndex = previousPortIndex + 1;
     this.currentPort = itinerary.ports[nextPortIndex];
+    this.currentPort.addShip(this);
   }
 }
 

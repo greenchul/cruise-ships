@@ -8,4 +8,7 @@ const itinerary = new Itinerary([port, port2]);
 const ship = new Ship(itinerary);
 
 console.log(ship);
-console.log(ship.currentPort.ships);
+console.log(ship.currentPort);
+
+ship.setSail();
+console.log(ship);
