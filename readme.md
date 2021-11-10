@@ -27,7 +27,7 @@ const dover = new Port("Dover");
 Create an instance of the Itinerary class and pass in an array of Ports as an argument
 
 ```js
-const itinerary = new Itinerery([dover, plymouth]);
+const itinerary = new Itinerary([dover, plymouth]);
 ```
 
 ### Creating a new ship
