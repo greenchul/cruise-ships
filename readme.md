@@ -10,7 +10,7 @@ Cruise ship project as part of the Manchester Codes curriculum which implements 
 - Change in to repo directory
 - Run NPM install
 
-## Creating ships, ports & itineries
+## Creating ships, ports & itineraries
 
 All ships need itineraries and all itineraries need ports.
 
