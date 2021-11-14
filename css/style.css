@@ -1,0 +1,70 @@
+html {
+  font-family: "Press Start 2P", cursive;
+}
+
+hr {
+  border: 1px solid red;
+}
+
+h1 {
+  text-align: center;
+}
+
+#map {
+  height: 50vh;
+  border: 1px solid black;
+  background-image: url("/images/water0.png");
+  /* background-color: aqua; */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row: 1fr 1fr 1fr;
+}
+
+#ports {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+.port {
+  width: 64px;
+  height: 32px;
+  background-image: url("../images/port.png");
+}
+
+.ship {
+  background-image: url("../images/ship.png");
+  width: 128px;
+  height: 64px;
+  position: absolute;
+}
+
+#ship-track {
+  display: flex;
+}
+
+#port-button {
+  background-color: white;
+  color: red;
+  font-family: "Press Start 2P", cursive;
+  padding: 5px;
+  margin: 5px;
+}
+
+input {
+  font-family: "Press Start 2P", cursive;
+}
+
+#controlls {
+  padding-top: 10px;
+}
+
+#sail-button {
+  background-color: white;
+  color: red;
+  font-family: "Press Start 2P", cursive;
+  padding: 5px;
+  margin: 0 auto;
+  display: block;
+  width: 50%;
+}
