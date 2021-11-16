@@ -18,14 +18,22 @@
     }
     renderPorts(ports) {
       const portsDiv = document.getElementById("ports");
+      const portsDivWidth = portsDiv.clientWidth;
+      console.log(portsDivWidth);
+
       ports.forEach((port, index) => {
         const portElement = document.createElement("div");
         portsDiv.appendChild(portElement);
         portElement.dataset.portIndex = index;
-
         portElement.className = "port";
+
+        if (portsDivWidth < 400 || index >= 5) {
+          console.log("small screen", index);
+          portsDiv.style.width = `${portsDivWidth + 256}px`;
+        }
       });
     }
+
     renderShip() {
       const shipTrack = document.getElementById("ship-track");
       const shipElement = document.createElement("div");
@@ -35,9 +43,10 @@
       const firstPort = document.querySelectorAll(".port")[0];
 
       shipElement.style.left = `${firstPort.offsetLeft}px`;
-      this.renderMessage(this.ship);
+      this.renderPortMessage();
     }
     sail() {
+      this.renderSailingMessage();
       const shipElement = document.querySelector(".ship");
       const portDivs = document.querySelectorAll(".port");
       const currentPortIndex = this.ship.itinerary.ports.indexOf(
@@ -48,30 +57,38 @@
 
       const nextPortIndex = currentPortIndex + 1;
       const nextPortElement = portDivs[nextPortIndex];
-      console.log(nextPortElement);
       const nextPortLeft = nextPortElement.offsetLeft;
-      console.log(nextPortLeft);
 
       const sailInterval = setInterval(() => {
         const shipLeft = shipElement.offsetLeft;
 
         if (shipLeft === nextPortLeft) {
           this.ship.setSail();
+
           this.ship.dock();
-          this.renderMessage(this.ship);
+
+          this.renderPortMessage();
+
           clearInterval(sailInterval);
         }
         shipElement.style.left = `${shipLeft + 1}px`;
       }, 40);
-      // shipElement.style.left = `${nextPortLeft}px`;
-
-      // this.ship.setSail();
-      // this.ship.dock();
-      // this.renderMessage(this.ship);
     }
-    renderMessage(ship) {
+    renderPortMessage() {
       const messageDiv = document.getElementById("message");
-      messageDiv.innerHTML = `At ${ship.currentPort.name}`;
+      const index = this.ship.itinerary.ports.indexOf(this.ship.currentPort);
+      const nextPort = this.ship.itinerary.ports[index + 1];
+      if (!nextPort) {
+        messageDiv.innerHTML = `At ${ship.currentPort.name} - final destination`;
+        const sailButton = document.getElementById("sail-button");
+        sailButton.disabled = true;
+      } else {
+        messageDiv.innerHTML = `At ${ship.currentPort.name}, next stop is ${nextPort.name}`;
+      }
+    }
+    renderSailingMessage() {
+      const messageDiv = document.getElementById("message");
+      messageDiv.innerHTML = `Sailing!`;
     }
   }
   if (typeof module !== "undefined" && module.exports) {

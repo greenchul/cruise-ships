@@ -27,14 +27,12 @@
         <p>Add destination</p>
         <form>
           <input type="text" class="input" id="port1" />
-          <input type="text" class="input" id="port2" />
-          <input type="text" class="input" id="port3" />
-          <input type="text" class="input" id="port4" />
         </form>
+        <button id="add-port">+</button>
+        <div id="ports-list"></div>
         <button id="port-button">Go!</button>
       </section>
       <section id="map">
-        <div></div>
         <div id="ports"></div>
         <div id="ship-track"></div>
       </section>
@@ -50,38 +48,71 @@
     <script>
       console.log("cruise ship connected");
       const port1Input = document.getElementById("port1");
-      const port2Input = document.getElementById("port2");
-      const port3Input = document.getElementById("port3");
-      const port4Input = document.getElementById("port4");
+      const addPort = document.getElementById("add-port");
       const portButton = document.getElementById("port-button");
       let controller;
       let port1;
-      let port2;
-      let port3;
-      let port4;
       let itinerary;
       let ship;
+      const addedPorts = [];
+      const portInstances = [];
+
+      // add and remove ports before initialising class
+
+      addPort.addEventListener("click", () => {
+        addedPorts.push(port1Input.value);
+
+        const portList = document.getElementById("ports-list");
+        const portTag = document.createElement("div");
+        portTag.className = "port-tag";
+        portTag.dataset.portName = port1Input.value;
+        portList.appendChild(portTag);
+        portTag.innerHTML = `${port1Input.value} <span class="span">x</span>`;
+
+        portTag.addEventListener("mouseover", () => {
+          const span = portTag.querySelector("span");
+          span.style.display = "inline";
+        });
+
+        const span = portTag.querySelector("span");
+        span.addEventListener("click", () => {
+          portList.removeChild(portTag);
+          const leftover = [];
+          Array.from(portList.children).forEach((el) => {
+            leftover.push(el.dataset.portName);
+          });
+          let portToRemove;
+          addedPorts.forEach((port, index) => {
+            if (!leftover.includes(port)) {
+              portToRemove = port;
+            }
+          });
+          console.log(portToRemove);
+          const indexToRemove = addedPorts.indexOf(portToRemove);
+          addedPorts.splice(indexToRemove, 1);
+        });
+        port1Input.value = null;
+      });
+
+      // create port classes, itinerary class and ship class
 
       portButton.addEventListener("click", () => {
-        console.log(
-          `creating intinerary with ${port1Input.value}, ${port2Input.value}, ${port3Input.value}, ${port4Input.value}`
-        );
-        port1 = new Port(`${port1Input.value}`);
-        port2 = new Port(`${port2Input.value}`);
-        port3 = new Port(`${port3Input.value}`);
-        port4 = new Port(`${port4Input.value}`);
-        itinerary = new Itinerary([port1, port2, port3, port4]);
+        addedPorts.forEach((port) => {
+          const portInstance = new Port(port);
+          portInstances.push(portInstance);
+        });
+        itinerary = new Itinerary(portInstances);
         ship = new Ship(itinerary);
         controller = new Controller(ship);
-        console.log(ship);
         // controller.renderBackground();
         controller.renderPorts(ship.itinerary.ports);
         controller.renderShip();
+        portButton.disabled = true;
       });
 
+      // sail
       const sailButton = document.getElementById("sail-button");
       sailButton.addEventListener("click", () => {
-        console.log("clicked sail button");
         controller.sail();
       });
     </script>

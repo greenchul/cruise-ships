@@ -10,14 +10,21 @@ h1 {
   text-align: center;
 }
 
+form {
+  display: inline;
+}
+
 #map {
   height: 50vh;
+  margin: 0 auto;
+  overflow-x: auto;
+  position: relative;
   border: 1px solid black;
   background-image: url("/images/water0.png");
-  /* background-color: aqua; */
+  background-color: aqua;
   display: grid;
   grid-template-columns: 1fr;
-  grid-row: 1fr 1fr 1fr;
+  grid-row: 1fr 1fr;
 }
 
 #ports {
@@ -49,6 +56,19 @@ h1 {
   font-family: "Press Start 2P", cursive;
   padding: 5px;
   margin: 5px;
+  display: block;
+}
+
+#add-port {
+  background-color: white;
+
+  font-family: "Press Start 2P", cursive;
+  padding: 5px;
+  margin: 5px;
+}
+
+.span {
+  display: none;
 }
 
 input {
