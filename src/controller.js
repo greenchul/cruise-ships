@@ -90,6 +90,7 @@
       const messageDiv = document.getElementById("message");
       messageDiv.innerHTML = `Sailing!`;
     }
+    restart() {}
   }
   if (typeof module !== "undefined" && module.exports) {
     module.exports = Controller;
