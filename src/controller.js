@@ -5,7 +5,7 @@
     }
     renderBackground() {
       const map = document.getElementById("map");
-      const backgrounds = ["/images/water0.png", "/images/water1.png"];
+      const backgrounds = ["images/water0.png", "images/water1.png"];
       let count = 0;
       window.setInterval(() => {
         if (count % 2 === 0) {

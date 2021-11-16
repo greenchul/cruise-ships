@@ -104,7 +104,7 @@
         itinerary = new Itinerary(portInstances);
         ship = new Ship(itinerary);
         controller = new Controller(ship);
-        // controller.renderBackground();
+        controller.renderBackground();
         controller.renderPorts(ship.itinerary.ports);
         controller.renderShip();
         portButton.disabled = true;
