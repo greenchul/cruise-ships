@@ -4,6 +4,8 @@
 
 Cruise ship project as part of the Manchester Codes curriculum which implements OOP, user stories and domain models, dependency injection & TDD with Jest (inc test doubles).
 
+You can view the GUI version of the project [here](https://greenchul.github.io/cruise-ships/)
+
 ## Installation
 
 - Clone this repo
