@@ -20,7 +20,7 @@ form {
   overflow-x: auto;
   position: relative;
   border: 1px solid black;
-  background-image: url("images/water0.png");
+  background-image: url("../images/water0.png");
   background-color: aqua;
   display: grid;
   grid-template-columns: 1fr;
