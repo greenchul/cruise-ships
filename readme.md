@@ -6,6 +6,8 @@ Cruise ship project as part of the Manchester Codes curriculum which implements 
 
 You can view the GUI version of the project [here](https://greenchul.github.io/cruise-ships/)
 
+![Screenshot of project](https://github.com/greenchul/greenchul/blob/main/assets/cruise-ship01.png)
+
 ## Installation
 
 - Clone this repo.
